@@ -122,10 +122,10 @@ void MyClass::do_it()
 {
 
 	// TODO: add your code here
-	//³õÊ¼»¯
+	//åˆå§‹åŒ–
 	UF_initialize();
 
-	UF_FEATURE_SIGN sign=UF_NULLSIGN;
+
 
 	/*
 UF_FEATURE_SIGNS
@@ -134,19 +134,19 @@ UF_FEATURE_SIGN
 
 Data Members
 UF_NULLSIGN = 0
-create new target solid ´´½¨ĞÂÄ¿±êÌå
+create new target solid åˆ›å»ºæ–°ç›®æ ‡ä½“
 
 UF_POSITIVE = 1
-add to target solid ÇóºÍ
+add to target solid æ±‚å’Œ
 
 UF_NEGATIVE = 2
-subtract from target solid Çó²î
+subtract from target solid æ±‚å·®
 
 UF_UNSIGNED = 3
-intersect with target solid Çó½»
+intersect with target solid æ±‚äº¤
 
 UF_NO_BOOLEAN = 4
-feature has not been booleaned ¹¦ÄÜÉĞÎ´±»²¼¶û»¯
+feature has not been booleaned åŠŸèƒ½å°šæœªè¢«å¸ƒå°”åŒ–
 
 UF_TOP_TARGET = 5
 feature is the "top target" feature, it has no
@@ -168,19 +168,19 @@ of the target sheet
 UF_DEFORM_NEGATIVE = 10
 feature used to deform the negative side
 of the target sheet*/
-
-	//´´½¨Ò»¸ö¿é
-	//¿éµÄÔ­µã
+	UF_FEATURE_SIGN sign=UF_NULLSIGN;
+	//åˆ›å»ºä¸€ä¸ªå—
+	//å—çš„åŸç‚¹
 	double corner[3] = { 0.0,0.0,0.0 };
-	//¿éµÄ±ß³¤
+	//å—çš„è¾¹é•¿
 	char* edge[3] = { "10.0","20.0","30.0" };
 	tag_t fTAG=NULL_TAG;
 	UF_MODL_create_block1(sign,corner,edge,&fTAG);
 
-	//nxµ¯³öÎÄ±¾¿ò
-	uc1601("´´½¨³É¹¦", 1);
+	//nxå¼¹å‡ºæ–‡æœ¬æ¡†
+	uc1601("åˆ›å»ºæˆåŠŸ", 1);
 
-	//ÍË³ö
+	//é€€å‡º
 	UF_terminate();
 	
 }
