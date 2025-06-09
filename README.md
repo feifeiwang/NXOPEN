@@ -5,7 +5,7 @@ Practice on NX secondary development（NX11、C++）
 
 learn_nxopen文件夹下是学习的内容记录  
 教程地址：https://www.bilibili.com/video/BV1nV411j7oU/  
-NX官方文档地址（需安装NX，该版本为NX11）
+NX官方文档地址（需安装NX，该版本为NX11）（部分在“官方文件”文件夹里）
 https://docs.sw.siemens.com/documentation/external/PL20190529153442596/en-US/nx/11/nx_api_sc/en_US/ugopen_doc/search.html
 
 
