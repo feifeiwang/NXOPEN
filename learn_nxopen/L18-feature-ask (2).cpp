@@ -123,7 +123,7 @@ void MyClass::do_it()
 {
 
 	// TODO: add your code here
-			//����Բ׶
+			//´´½¨Ô²×¶
 	UF_initialize();
 	UF_FEATURE_SIGN sign1 = UF_NULLSIGN;
 	double origin[3] = { 0.0,0.0,0.0 };
@@ -163,6 +163,7 @@ uf_list_p_t * object_list
 			TAG2,
             &list
         );
+	//寻找边特征
 
 	uf_list_p_t list2 = NULL;
 	UF_MODL_ask_feat_faces
@@ -170,8 +171,11 @@ uf_list_p_t * object_list
 			TAG2,
             &list2
         );
+	//寻找面特征
 	char msg[100];
 	int count;
+
+	//链表数量，并打印
 	UF_MODL_ask_list_count
         (
 			list2,
@@ -180,7 +184,7 @@ uf_list_p_t * object_list
 	sprintf(msg, "%d", count);
 
 	uc1601(msg, 1);
-
+	
 	UF_terminate();
 }
 
