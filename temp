@@ -1,0 +1,8 @@
+#include <uf_layer.h>
+#include <uf_ui.h>
+
+//初始化
+	UF_initialize();
+
+		//退出
+	UF_terminate();
