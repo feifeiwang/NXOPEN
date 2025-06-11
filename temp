@@ -6,3 +6,8 @@
 
 		//退出
 	UF_terminate();
+
+
+UF_UI_open_listing_window();
+UF_UI_write_listing_window(msg);
+UF_UI_write_listing_window("\n");
