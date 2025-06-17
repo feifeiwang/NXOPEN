@@ -2,6 +2,8 @@
 Practice on NX secondary development（NX11、C++）
 
 学习NX二次开发的程序记录，供自己以后参考用
+  
+#如有侵权，请联系删除
 
 learn_nxopen文件夹下是学习的内容记录  
 教程地址：https://www.bilibili.com/video/BV1nV411j7oU/  
@@ -34,8 +36,20 @@ L30：图层操作（对应视频第08章14）（函数参考UF_LAYER Functions�
 L32：遍历图层元素，实例：删除图层中所有内容（对应视频第08章16）  
 L34：对象操作（设置相关set）（对应视频第08章18）（函数参考UF_OBJ Functions）   
 L35：对象操作（获取相关ask）（对应视频第08章19）  
-L36：表达式操作（对应视频第08章20）
+L36：表达式操作（对应视频第08章20）    
+属性操作NX11更新了函数，老函数还能凑效  
+L38：删除属性（函数参考UF_ATTR Functions）（对应视频第09章01）  
+L39:创建属性（对应视频第09章02） （NX11的帮助文件写了UF_ATTR_set_user_attribute替代了UF_ATTR_assign，但是我试了试新的函数老是不成功，代码在注释里，不知道问题出在哪里。）  
+L40：查找属性 （对应视频第09章03）   
 
+
+暂时跳过   
+
+
+
+
+
+  
 
 
 
