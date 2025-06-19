@@ -7,7 +7,8 @@
 #include <uf_part.h>
 #include <uf_part_types.h>
 #include <uf_ui.h>
-
+#include <uf_obj.h>
+#include <uf_assem.h>
 // Internal Includes
 #include <NXOpen/ListingWindow.hxx>
 #include <NXOpen/NXMessageBox.hxx>
@@ -129,25 +130,25 @@ void MyClass::print(const char * msg)
 void MyClass::do_it()
 {
 
-	// TODO: add your code here
-	//初始化
-	UF_initialize();
+    // TODO: add your code here
+    //初始化
+    UF_initialize();
 
 
-	/*
-	//创建图纸信息
-	UF_DRAW_info_t drawing_info;
-	tag_t drawing_tag = NULL_TAG;
+    /*
+    //创建图纸信息
+    UF_DRAW_info_t drawing_info;
+    tag_t drawing_tag = NULL_TAG;
 
-	drawing_info.size_state = UF_DRAW_METRIC_SIZE;//公制
-	drawing_info.size.metric_size_code = UF_DRAW_A1;//图纸大小
-	drawing_info.drawing_scale=1.0;//缩放比例
-	drawing_info.units = UF_PART_METRIC;//单位
-	drawing_info.projection_angle = UF_DRAW_FIRST_ANGLE_PROJECTION;//第一人称投影
+    drawing_info.size_state = UF_DRAW_METRIC_SIZE;//公制
+    drawing_info.size.metric_size_code = UF_DRAW_A1;//图纸大小
+    drawing_info.drawing_scale=1.0;//缩放比例
+    drawing_info.units = UF_PART_METRIC;//单位
+    drawing_info.projection_angle = UF_DRAW_FIRST_ANGLE_PROJECTION;//第一人称投影
 
-	//创建图纸
-	UF_DRAW_create_drawing("name", &drawing_info, &drawing_tag);
-	*/
+    //创建图纸
+    UF_DRAW_create_drawing("name", &drawing_info, &drawing_tag);
+    */
 
 
 
@@ -193,13 +194,13 @@ void MyClass::do_it()
     // 构建新路径（C:\temp\_model5_dwg.prt）
     std::strcat(path2, name);
     std::strcat(path2, "_dwg.prt");
-
+    //以上为获取名字与路径
 
     //NXOpen::Session* theSession = NXOpen::Session::GetSession();
     //NXOpen::Part* workPart(theSession->Parts()->Work());
     //NXOpen::Part* displayPart(theSession->Parts()->Display());
 
-    
+    //以下为录制所得的创建图纸代码
     NXOpen::Session::UndoMarkId markId1;
     markId1 = theSession->SetUndoMark(NXOpen::Session::MarkVisibilityVisible, NXString("\345\274\200\345\247\213", NXString::UTF8));
     NXOpen::FileNew* fileNew1;
@@ -210,7 +211,7 @@ void MyClass::do_it()
     //theSession->DeleteUndoMark(markId2, NULL);
     //NXOpen::Session::UndoMarkId markId3;
     //markId3 = theSession->SetUndoMark(NXOpen::Session::MarkVisibilityInvisible, NXString("\346\226\260\345\273\272", NXString::UTF8));
-    
+
     //图纸设置
     fileNew1->SetTemplateFileName("A0-noviews-template.prt");//图纸模板 按需修改
 
@@ -251,11 +252,74 @@ void MyClass::do_it()
 
     theSession->ApplicationSwitchImmediate("UG_APP_DRAFTING");
 
-    workPart->Drafting()->EnterDraftingApplication();
-    
+    workPart->Drafting()->EnterDraftingApplication();//进入草图应用模块
 
 
- 
+    /*NXopen录制创建图纸*/
+
+
+
+
+
+    //创建基本视图
+    // 
+    //得到当前图纸页tag
+    tag_t drawing_tag = NULL_TAG;
+    UF_DRAW_ask_current_drawing(&drawing_tag);
+
+    //得到前视图的tag
+    tag_t view_tag = NULL_TAG;
+    UF_OBJ_cycle_by_name_and_type(UF_ASSEM_ask_work_part(), "FRONT", UF_view_type, false, &view_tag);
+
+
+    UF_DRAW_view_info_t view_info;
+    UF_DRAW_initialize_view_info(&view_info);//初始化
+    tag_t draw_view_tag = NULL_TAG;
+
+    double dwg_point[2] = { 150.0,150.0 };
+    UF_DRAW_import_view(drawing_tag, view_tag, dwg_point, &view_info, &draw_view_tag);
+
+
+    // 
+    // 用基本视图创建新的投影视图
+    double dwg_reference_point[2] = { 350.0,150.0 };
+    tag_t new_view_tag = NULL_TAG;
+    UF_DRAW_add_orthographic_view(drawing_tag, draw_view_tag, UF_DRAW_project_infer, dwg_reference_point, &new_view_tag);
+
+    double dwg_reference_point2[2] = { 150.0,350.0 };
+    tag_t new_view_tag2 = NULL_TAG;
+    UF_DRAW_add_orthographic_view(drawing_tag, draw_view_tag, UF_DRAW_project_infer, dwg_reference_point2, &new_view_tag2);
+
+
+
+    //创建剖视图
+    double step_dir[3] = { 0.0,1.0,0.0 };//剖线方向
+    double arrow_dir[3] = { 1.0,0.0,0.0 };//剪头方向
+    UF_DRF_object_t cut_object;
+    cut_object.object_assoc_type = UF_DRF_dwg_pos;
+    cut_object.assoc_dwg_pos[0] = dwg_point[0];
+    cut_object.assoc_dwg_pos[1] = dwg_point[1];//剖线位置
+
+    tag_t sxview_tag = NULL_TAG;
+    double view_placement_pt[2]={550.0,150.0};//剖视图放置位置
+
+    UF_DRAW_create_simple_sxview(drawing_tag, 1.0, step_dir, arrow_dir, draw_view_tag, &cut_object, view_placement_pt, &sxview_tag);
+
+
+        //更新视图
+    //UF_DRAW_update_one_view(drawing_tag, draw_view_tag);
+    UF_DRAW_upd_out_of_date_views(drawing_tag);
+
+    /*
+    UF_DRAW_proj_dir_e
+UF_DRAW_project_infer = 0
+UF_DRAW_project_above
+UF_DRAW_project_right
+UF_DRAW_project_below
+UF_DRAW_project_left
+    */
+        
+    // 
     // 
     // 
 	//退出
