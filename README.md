@@ -52,7 +52,11 @@ L40：查找属性 （对应视频第09章03）
 L17-01-DRAW_create 图纸页创建，UF方法和NXOPEN录制两种。优先选后者。创建视图、剖视图，另外有官方的一个剖视图的案例（uf_draw_eg14.c）  
   
 L19-02-set-coler-nxopen  创建一个体，并着色（uf创建体，NXOpen方法着色）   
-L19-03_NXopen_create_block  创建体和圆柱（NXOpen方法）
+L19-03_NXopen_create_block  创建体和圆柱（NXOpen方法）   
+
+
+--分割符--  
+程序编写（草稿版）\xingweigongcha_single.cpp  写了一个对所有选中的形位公差字体统一修改的程序
   
 
 
