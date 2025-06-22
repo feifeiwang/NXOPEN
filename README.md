@@ -58,6 +58,6 @@ L19-03_NXopen_create_block  创建体和圆柱（NXOpen方法）
 --分割符--  
 程序编写（草稿版）\xingweigongcha_single.cpp  写了一个对所有选中的形位公差字体统一修改的程序
   
-
-
+程序编写（草稿版）\Feature_Control_Frame_multiple.cpp  对选中对象中的形位公差字体格式统一修改
+程序编写（草稿版）\Geometric_Datum_multiple.cpp  对选中对象中的基准字体格式统一修改
 
