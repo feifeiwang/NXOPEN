@@ -9,7 +9,10 @@ learn_nxopen文件夹下是学习的内容记录
 教程地址：https://www.bilibili.com/video/BV1nV411j7oU/  
 
 NX官方文档地址
+https://www.ugapi.com/doc/nxopen/
+
 https://docs.sw.siemens.com/documentation/external/PL20190529153442596/en-US/nx/11/nx_api_sc/en_US/ugopen_doc/search.html
+
   一部分官方文档内容打印成pdf，在官方文档--帮助文件下  
   官方NXopen的示例程序以及官方的头文件之类在官方文档--程序与官方示例下  
   官方文档文件夹下内容与本项目无直接关系，仅作为资料收集使用（企图后续让大模型去学习）  
